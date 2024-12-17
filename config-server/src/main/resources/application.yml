@@ -1,0 +1,32 @@
+server:
+  port: 8888  # Port du Config Server
+
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hrdb
+    username: youssef
+    password: youssef
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: "https://github.com/youssefJmaiel/config"  # Remplacez par votre URI Git
+          searchPaths: 'hr-service'  # Chemin où les fichiers de configuration sont stockés dans le dépôt Git
+          username: "youssef.jmaiel1@esprit.tn"  # Si nécessaire pour l'authentification
+          password: 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  # Si nécessaire pour l'authentification
+          cloneOnStart: true  # Cloner le dépôt au démarrage
+          default-label: main  # Branche Git par défaut (si applicable)
+
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health, info
